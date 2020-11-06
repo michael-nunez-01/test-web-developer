@@ -1,6 +1,37 @@
 LeaseLabs Front-End Web Developer Test
 =============================
 
+## Michael's changes
+
+This is a Yarn 2 repository that uses Webpack to build the website. This was made without the "zero-install" philosophy in mind.
+
+Whether you choose to keep the Yarn 2 files, use this command to make the webpage with Yarn:
+
+```bash
+yarn install
+yarn webpack serve
+```
+
+You may also instead build with npm:
+
+```bash
+npm install
+npm run start
+# OR
+npx webpack serve
+```
+
+Either method should eventually open http://localhost:8080; the webpage will be there.
+
+Other changes include:
+
+- images moved to src/img
+- app.js moved to src
+- app.js exports images variable
+- And a basic attempt at replicating the mockup using this system
+
+## General info
+
 **Please clone or fork the test from this repo**
 
 Please markup the provided design using HTML, CSS and Javascript. A layered Photoshop file and jpg of the design has been provided. Please contact us if any instruction is unclear. Thank you!

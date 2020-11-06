@@ -15,3 +15,5 @@ var images = {
 		path: 'img/beast.jpg'
 	}
 };
+
+export default images;

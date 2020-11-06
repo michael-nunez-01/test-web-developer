@@ -1,0 +1,169 @@
+/** Use system fonts, from https://css-tricks.com/snippets/css/system-font-stack/ **/
+@font-face
+  font-family: system
+  font-style: normal
+  font-weight: 300
+  src: local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"), local(".LucidaGrandeUI"), local("Ubuntu Light"), local("Segoe UI Light"), local("Roboto-Light"), local("DroidSans"), local("Tahoma")
+
+/* Now, let's apply it on an element */
+body
+  font-family: "system"
+
+/** Your customizations **/
+
+$generic-desktop-width: 768px
+$generic-tablet-width: 600px
+$primary-color: #409edb
+$secondary-color: black
+$division-color: lightgray
+$navigation-color: black
+$content-color: #606060
+@mixin use-container
+  ::after
+    content: ''
+    clear: both
+    display: table
+@mixin use-col($grid-columns, $min-width: $generic-desktop-width, $is-standalone: true, $standalone-padding: 15px)
+  @if $is-standalone
+    width: 100%
+    float: left
+    padding: $standalone-padding
+  @media only screen and (min-width: $min-width)
+    width: (100% / 12) * $grid-columns
+
+body
+  margin: 0
+  padding: 0
+  color: $content-color
+img
+  max-width: 100%
+  height: auto
+a
+  color: $navigation-color
+  text-decoration: none
+  transition: .05s ease
+a:hover, a:active
+  color: $primary-color
+
+*
+  box-sizing: border-box
+[class*="col-"]
+  width: 100%
+  float: left
+  padding: 15px
+@for $i from 1 through 12
+  .col-#{$i}
+    @include use-col($i, $generic-desktop-width, false)
+  .col-sm-#{$i}
+    @include use-col($i, $generic-tablet-width, false)
+.row
+  @include use-container
+
+#header
+  $height: 80px
+  @include use-col(12)
+  @include use-container
+  border-bottom: 1px solid $division-color
+  .logo
+    @include use-col(4, $generic-desktop-width)
+    height: $height
+  .nav
+    @include use-col(8, $generic-desktop-width, true, 0)
+    @include use-container
+    min-height: $height
+    .item
+      @include use-col(12 * (1/5), $generic-desktop-width, true, 0)
+      a
+        display: inline-block
+        width: 100%
+        padding: 20px 0
+        @media only screen and (min-width: $generic-desktop-width)
+          padding: 0
+          line-height: $height
+        font-weight: bold
+        text-align: center
+        text-transform: uppercase
+    .item.active
+      a
+        background-color: $primary-color
+        color: white
+      a:hover, a:active
+        color: #e0e0e0
+#sidebar
+  @include use-col(4)
+  @include use-container
+  .group
+    @include use-col(12)
+    .header
+      background-color: #dddadc
+      color: black
+      letter-spacing: 0.05em
+      border-radius: 15px
+      padding: 1em
+      margin-bottom: 1em
+      text-transform: uppercase
+    .body
+      ul, li
+        line-height: 1.5em
+        margin: 0
+      ul
+        list-style: none
+        li::before
+          content: '\2022'
+          color: $primary-color
+          font-weight: bold
+          display: inline-block
+          width: 1em
+          margin-left: -1.5em
+#body
+  @include use-col(8)
+  @include use-container
+  h1
+    color: $primary-color
+    margin-bottom: 0
+  h2
+    margin-left: 1em
+    margin-top: 0.2em
+    color: $secondary-color
+    font-style: italic
+    text-transform: lowercase
+  p
+    line-height: 1.65em
+  #next-articles
+    margin-top: 40px
+#next-articles
+  $height: 150px
+  @include use-col(12, $generic-desktop-width, true, 0)
+  @include use-container
+  .article
+    @include use-col(4, $generic-tablet-width, true, 0)
+    .thumbnail
+      max-width: 100%
+      height: $height
+      margin: 20px
+      border: 0.5px solid $primary-color
+      background-repeat: no-repeat
+      background-size: cover
+      background-position: center
+      position: relative
+    .thumbnail-overlay
+      opacity: 0
+      transition: .25s ease
+      background-color: #{$primary-color}90
+      width: 100%
+      height: 100%
+      text-align: center
+      position: absolute
+      *
+        color: white
+      > *
+        position: relative
+        top: $height / 2
+      > *:first-child
+        margin-top: -1.5em
+      .title
+        font-weight: bold
+        text-transform: uppercase
+        margin-bottom: 0.25em
+  .article:hover .thumbnail-overlay
+    opacity: 1

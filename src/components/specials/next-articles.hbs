@@ -1,0 +1,12 @@
+<div id='next-articles'>
+  {{#each articles}}
+  <div class='article'>
+    <div class='thumbnail' style='background-image: url({{this.path}})'>
+      <div class='thumbnail-overlay'>
+        <div class='title'>{{this.heading}}</div>
+        <div class='description'>{{this.description}}</div>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
